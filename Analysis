@@ -1,0 +1,72 @@
+
+Report on the performance of the deep learning model created for Alphabet Soup.
+
+1.Overview of the analysis: 
+The nonprofit foundation Alphabet Soup wants a tool that can help it select the applicants for funding with the best chance of success in their ventures.
+With  knowledge of machine learning and neural networks, use the features in the provided dataset to create a binary classifier that can predict whether
+applicants will be successful if funded by Alphabet Soup.
+
+2.Results:
+•	Data Preprocessing
+
+After dropping th EIN and the NAME columns all the other columns were considered the features for the model. 
+The target variable for the model was labled "IS_SUCCESSFUL" and has a value of 1 for yes and 0 for no. 
+Name was added back in the second test for binning purposes.
+
+Compiling, Training, and Evaluating the Model:
+
+Neurons, Layers, and Activation Functions:
+
+For the neural network model, I selected a configuration with multiple hidden layers containing varying numbers of neurons.
+The activation functions used were ReLU for the hidden layers and Sigmoid for the output layer. 
+This choice was made to introduce non-linearity and capture complex patterns in the data.
+
+Sequential:
+
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┓
+┃ Layer (type)                         ┃ Output Shape                ┃         Param # ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━┩
+│ dense_7 (Dense)                      │ (None, 80)                  │           4,000 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ dense_8 (Dense)                      │ (None, 30)                  │           2,430 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ dense_9 (Dense)                      │ (None, 1)                   │              31 │
+└──────────────────────────────────────┴─────────────────────────────┴─────────────────┘
+ Total params: 6,461 (25.24 KB)
+ Trainable params: 6,461 (25.24 KB)
+ Non-trainable params: 0 (0.00 B)
+
+# Evaluate the model using the test data
+model_loss, model_accuracy = nn.evaluate(X_test_scaled,y_test,verbose=2)
+print(f"Loss: {model_loss}, Accuracy: {model_accuracy}")
+output:
+215/215 - 0s - 1ms/step - accuracy: 0.5841 - loss: 0.8418
+Loss: 0.8417646884918213, Accuracy: 0.584110796451568
+
+Optimization:
+
+Achived an accuracy of around  79% , which is 4% more than the 75%
+# Evaluate the model using the test data
+
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┓
+┃ Layer (type)                         ┃ Output Shape                ┃         Param # ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━┩
+│ dense_9 (Dense)                      │ (None, 80)                  │          39,120 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ dense_10 (Dense)                     │ (None, 30)                  │           2,430 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ dense_11 (Dense)                     │ (None, 1)                   │              31 │
+└──────────────────────────────────────┴─────────────────────────────┴─────────────────┘
+ Total params: 41,581 (162.43 KB)
+ Trainable params: 41,581 (162.43 KB)
+ Non-trainable params: 0 (0.00 B)
+
+
+model_loss, model_accuracy = nn.evaluate(X_test_scaled,y_test,verbose=2)
+print(f"Loss: {model_loss}, Accuracy: {model_accuracy}")
+output:
+268/268 - 1s - 2ms/step - accuracy: 0.7864 - loss: 0.5125
+Loss: 0.5124877691268921, Accuracy: 0.786355674266815
+
+To enhance the model performance, I experimented with adjusting the number of neurons in the hidden layers, changing the activation functions, modifying the learning rate, 
+and exploring different optimization algorithms.
